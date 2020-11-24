@@ -16,7 +16,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String _platformVersion = 'Unknown';
+  File _platformVersion;
 
   @override
   void initState() {
@@ -28,11 +28,12 @@ class _MyAppState extends State<MyApp> {
     LxWatermark lw;
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
+//      ''
       lw = await LxWatermark.getInstance();
-      File file = await LxWatermark().init('assets/images/add.png');
-      _platformVersion = file.path;
+//      File file = await LxWatermark().init('assets/images/add.png');
+      File file = await LxWatermark().init('https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=4006671917,2375152411&fm=11&gp=0.jpg', local: true);
+      _platformVersion = file;
     } catch (e) {
-      _platformVersion = "1111";
       throw e;
     }
 
@@ -59,10 +60,10 @@ class _MyAppState extends State<MyApp> {
                   initPlatformState();
                 },
                 behavior: HitTestBehavior.opaque,
-                child: Text('Running on: $_platformVersion\n'),
+                child: Text('Running on: ${_platformVersion?.path}\n'),
               ),
             ),
-            Image.asset("$_platformVersion")
+            _platformVersion != null? Image.file(_platformVersion):Container()
           ],
         ),
       ),
