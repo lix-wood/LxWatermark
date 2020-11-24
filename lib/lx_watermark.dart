@@ -37,23 +37,6 @@ class LxWatermark {
     return _completer.future;
   }
 
-//  LxWatermark () {}
-  ///对图片重定义宽高尺寸[dstWidth],[dstHeight]
-  Future<ui.Image> _resize(ui.Image image, int dstWidth,int dstHeight) {
-    var recorder = ui.PictureRecorder();
-    //使用PictureRecorder对图片进行录制
-    Paint paint = Paint();
-    Canvas canvas = Canvas(recorder);
-    double srcWidth = image.width.toDouble();
-    double srcHeight = image.height.toDouble();
-    canvas.drawImageRect(
-        image,
-        Rect.fromLTWH(0, 0, srcWidth, srcHeight),
-        Rect.fromLTWH(0, 0, dstWidth.toDouble() ,
-        dstHeight.toDouble()), paint);
-    return recorder.endRecording().toImage(dstWidth, dstHeight);//返回图片
-   }
-
   Future<ui.Image> loadImageByProvider(
       ImageProvider provider, {
         ImageConfiguration config = ImageConfiguration.empty,
@@ -89,7 +72,7 @@ class LxWatermark {
   }
 
   Future<File> init(dynamic file, { List<Rich> richText = const <Rich>[], bool local = false }) async {
-    if( richText == null ) {
+    if( richText.length == 0 ) {
       richText = [
         Rich(
           text: "暂无水印文本",

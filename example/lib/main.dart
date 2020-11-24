@@ -31,7 +31,7 @@ class _MyAppState extends State<MyApp> {
 //      ''
       lw = await LxWatermark.getInstance();
 //      File file = await LxWatermark().init('assets/images/add.png');
-      File file = await LxWatermark().init('https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=4006671917,2375152411&fm=11&gp=0.jpg', local: true);
+      File file = await LxWatermark().init('https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=4006671917,2375152411&fm=11&gp=0.jpg', local: false);
       _platformVersion = file;
     } catch (e) {
       throw e;
